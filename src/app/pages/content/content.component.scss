@@ -1,0 +1,179 @@
+@import '../../../default.scss';
+
+.content {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 2.5rem;
+  background-color: #f8fafc;
+  width: 100%;
+}
+
+.node-selector {
+  width: 100%;
+}
+
+/* Dashboard Header Styles */
+.dashboard-controls {
+  .btn-icon {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .form-label {
+    letter-spacing: 0.5px;
+    color: #64748b;
+  }
+
+  .border-start-lg {
+    @media (min-width: 992px) {
+      border-left: 1px solid #e2e8f0 !important;
+    }
+  }
+
+  .row.shadow-sm {
+    border: 1px solid rgba(0,0,0,0.05) !important;
+    background-color: white !important;
+  }
+}
+
+/* Group Cards Grid Styles */
+.group-card {
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 1px solid #e2e8f0 !important;
+  background-color: white !important;
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+    border-color: color(primary) !important;
+  }
+
+  &.selected-node {
+    border: 2px solid color(primary) !important;
+    background-color: white !important;
+    box-shadow: 0 10px 15px -3px rgba(color(primary), 0.1) !important;
+  }
+}
+
+.group-icon {
+  width: 52px;
+  height: 52px;
+  background-color: rgba(color(primary), 0.1);
+  color: color(primary);
+  transition: all 0.3s ease;
+}
+
+.group-card:hover .group-icon {
+  transform: scale(1.1) rotate(5deg);
+  background-color: color(primary) !important;
+  color: white !important;
+}
+
+.group-card-header {
+  h5 {
+    font-size: 1.15rem;
+    color: #1e293b;
+  }
+  code {
+    background-color: #f1f5f9;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Device Section Styles */
+.device-section {
+  background-color: #f8fafc;
+  
+  h6 {
+    letter-spacing: 0.05em;
+  }
+}
+
+.device-item {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid #e2e8f0 !important;
+  background-color: white !important;
+  margin-bottom: 0.5rem;
+  
+  &:hover {
+    background-color: #ffffff !important;
+    border-color: color(primary) !important;
+    transform: scale(1.02);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  &.device-active {
+    background-color: rgba(color(primary), 0.02) !important;
+    border-color: color(primary) !important;
+    border-width: 1.5px !important;
+    
+    .bi-cpu {
+      color: color(primary);
+      filter: drop-shadow(0 0 4px rgba(color(primary), 0.3));
+    }
+    
+    .small.text-dark {
+      color: color(primary) !important;
+      font-weight: 700 !important;
+    }
+  }
+}
+
+/* Badge Styles */
+.bg-primary-subtle {
+  background-color: rgba(color(primary), 0.1) !important;
+}
+
+.text-primary {
+  color: color(primary) !important;
+}
+
+/* Empty States */
+.empty-state {
+  max-width: 600px;
+  margin: 0 auto;
+  
+  .empty-icon-lrg {
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+  }
+  
+  &:hover .empty-icon-lrg {
+    transform: scale(1.05) translateY(-5px);
+  }
+}
+
+.border-dashed {
+  border: 2px dashed #cbd5e1 !important;
+}
+
+/* Scrollbar Customization */
+.content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 5px;
+  border: 3px solid #f1f5f9;
+  
+  &:hover {
+    background: #94a3b8;
+  }
+}

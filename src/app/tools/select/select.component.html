@@ -1,0 +1,15 @@
+<div class="select" >
+  <div class="options-container">
+    <input [(ngModel)]="optionValue" type="text" (focus)="onFocus()" [placeholder]="placeholder()">
+    @if (selectFocus) {
+    <div class="select-options">
+      @for (option of options(); track $index) {
+      <div class="option" (click)="selectValue(option.key)">
+        <h5>{{option.value}}</h5>
+      </div>
+      }
+    </div>
+    }
+  </div>
+
+</div>

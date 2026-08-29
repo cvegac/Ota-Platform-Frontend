@@ -1,0 +1,76 @@
+@import '../../../default.scss';
+
+.page{
+  height: 100vh;
+}
+
+.header {
+  background-color: color(primary);
+  color: #ffffff;
+  padding: 0.75rem 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-bottom: 2px solid rgba(255,255,255,0.05);
+
+  .brand-text {
+    letter-spacing: -0.5px;
+    font-family: 'Inter', sans-serif; // O la tipografía que estés usando
+  }
+
+  i.bi-person-circle {
+    font-size: 1.1rem;
+    vertical-align: middle;
+  }
+}
+.menu{
+  height: 100%;
+  background-color: color(wire-dark);
+}
+.content{
+  height: 100%;
+  background-color: color(wire-dark);
+  flex-wrap: nowrap;
+}
+
+
+.overlay {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 10%;
+  height: 10%;
+  display: flex;
+  flex-wrap: wrap;
+  z-index: 1000; // Ensure it overlays other content
+}
+.color-box {
+  width: 50%;
+  height: 50%;
+}
+
+.color1 {
+  background-color: color(primary);
+}
+
+.color2 {
+  background-color: color(secondary);
+}
+
+.color3 {
+  background-color: color(wire);
+}
+
+.color4 {
+  background-color: color(wire-dark);
+}
+.manager{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.target {
+  border-style: solid;
+  height: 90%;
+}

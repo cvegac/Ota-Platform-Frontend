@@ -1,0 +1,103 @@
+@import '../../../styles.scss';
+.option{
+  font-size: 3rem;
+  text-align: center;
+}
+
+i {
+  cursor: pointer;
+  color: color(primary);
+  transition: color 0.2s ease-out;
+  transition: font-size 0.3s ease-out;
+
+ }
+
+.item i:hover  {
+  color: color(wire);
+  font-size: 3.5rem;
+}
+
+.option h5{
+  padding: 10px;
+  cursor: pointer;
+  color: color(wire-dark);
+  transition: color 0.2s ease-out;
+  transition: font-size 0.3s ease-out;
+}
+
+.option:hover h5 {
+  color: color(wire);
+  font-size: 1.05rem;
+}
+.selected-options {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  background-color: color(wire);
+}
+.options-container {
+  width: 100%;
+  height: auto;
+  position: relative;
+
+  input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: #007bff;
+    }
+  }
+}
+.select {
+  position: relative;
+  width: 100%;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    border-color: #007bff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h5 {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+  }
+}
+
+.select-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 10;
+  overflow-y: auto;
+
+  .option {
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    h5 {
+      margin: 0;
+    }
+  }
+}

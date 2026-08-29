@@ -1,0 +1,74 @@
+<div class="auth-page d-flex justify-content-center align-items-center vh-100">
+  <div class="auth-card">
+
+    <!-- Header -->
+    <div class="auth-header text-center mb-4">
+      <div class="auth-logo mb-3">
+        <i class="bi bi-person-plus-fill"></i>
+      </div>
+      <h4 class="fw-bold text-dark mb-1">Crear Cuenta</h4>
+      <p class="text-muted small mb-0">Únete a la Embedded Platform</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="row g-3">
+
+      <div class="col-12">
+        <label for="name" class="form-label fw-600 small text-muted text-uppercase">Nombre Completo</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-person text-primary"></i></span>
+          <input type="text" id="name" formControlName="name"
+            class="form-control bg-light border-start-0" placeholder="Ej: Juan Pérez" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="email" class="form-label fw-600 small text-muted text-uppercase">Correo Electrónico</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-primary"></i></span>
+          <input type="email" id="email" formControlName="email"
+            class="form-control bg-light border-start-0" placeholder="juan@ejemplo.com" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="username" class="form-label fw-600 small text-muted text-uppercase">Usuario</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-at text-primary"></i></span>
+          <input type="text" id="username" formControlName="username"
+            class="form-control bg-light border-start-0" placeholder="juanp" />
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label for="password" class="form-label fw-600 small text-muted text-uppercase">Contraseña</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock text-primary"></i></span>
+          <input type="password" id="password" formControlName="password"
+            class="form-control bg-light border-start-0" placeholder="Mínimo 6 caracteres" />
+        </div>
+        <div class="form-text mt-1 small">Mínimo 6 caracteres.</div>
+      </div>
+
+      @if (errorMessage) {
+        <div class="col-12">
+          <div class="alert-danger-soft d-flex align-items-center gap-2">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            {{ errorMessage }}
+          </div>
+        </div>
+      }
+
+      <div class="col-12 mt-2">
+        <button type="submit" class="btn btn-primary w-100 py-2 fw-600" [disabled]="registerForm.invalid">
+          Registrarse
+        </button>
+      </div>
+
+      <div class="col-12 text-center">
+        <span class="text-muted small">¿Ya tienes cuenta? </span>
+        <a routerLink="/login" class="text-decoration-none fw-600 small">Inicia sesión</a>
+      </div>
+
+    </form>
+  </div>
+</div>

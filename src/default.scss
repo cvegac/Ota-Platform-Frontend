@@ -1,0 +1,11 @@
+
+$colors: (
+  primary: #16404D,
+  secondary: #a6cdc654,
+  wire: #DDA853,
+  wire-dark: #FBF5DD,
+);
+
+@function color($name) {
+  @return map-get($colors, unquote($name));
+}

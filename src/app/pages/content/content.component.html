@@ -1,0 +1,170 @@
+<div class="content">
+  <form class="node-selector container" [formGroup]="nodeForm">
+
+    <!-- Project selector row -->
+    <div class="row justify-content-md-center mb-4">
+      <div class="col-9 d-flex justify-content-center align-items-center gap-3">
+        <app-select class="flex-grow-1" [options]="projectOptions" placeholder="Selecciona un proyecto"
+          formControlName="project"></app-select>
+        <!-- Only ADMIN can create projects -->
+        @if (isAdmin) {
+          <i class="new-project-button bi bi-box-seam fs-4" data-toggle="tooltip" title="Nuevo proyecto"
+            (click)="openProjectForm()"></i>
+        }
+      </div>
+    </div>
+
+    @if (this.nodeForm.get('project')?.value) {
+
+      <!-- Filter & action bar -->
+      <div class="group-filter container my-3">
+        <form [formGroup]="groupFilterForm" class="row justify-content-center align-items-center g-2">
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="ID del grupo" formControlName="id">
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Nombre del grupo" formControlName="name">
+          </div>
+          <div class="col-md-auto d-flex align-items-center gap-2">
+            <button type="button" class="btn btn-primary" (click)="applyGroupFilter()">Filtrar</button>
+            <!-- Only ADMIN can add groups -->
+            @if (isAdmin) {
+              <button type="button" class="btn btn-success" (click)="openGroupForm()">Agregar Grupo</button>
+            }
+          </div>
+          <div class="w-100 my-1"></div>
+          <div class="col-md-auto d-flex justify-content-center gap-2">
+            <!-- All users can upload firmware -->
+            <button type="button" class="btn btn-secondary" (click)="openFirmwareUpdate()">
+              <i class="bi bi-upload me-1"></i> Cargar programa
+            </button>
+
+            <button type="button" class="btn btn-outline-info" (click)="downloadBaseModel('ESP32')" title="Descargar ejemplo base ESP32">
+              <i class="bi bi-file-earmark-zip me-1"></i> Base ESP32
+            </button>
+            <button type="button" class="btn btn-outline-info" (click)="downloadBaseModel('ESP32S3')" title="Descargar ejemplo base ESP32-S3">
+              <i class="bi bi-file-earmark-zip me-1"></i> Base ESP32-S3
+            </button>
+
+            <!-- Only ADMIN can manage collaborators -->
+            @if (isAdmin) {
+              <button type="button" class="btn btn-outline-primary" (click)="openCollaboratorForm()">
+                <i class="bi bi-person-plus me-1"></i> Agregar Colaborador
+              </button>
+            }
+          </div>
+        </form>
+      </div>
+
+      <!-- Group cards grid -->
+      <div class="nodes container">
+        <div class="row g-3">
+
+          @for (group of groups; track group.id) {
+            <div class="col-12">
+              <!-- Group card -->
+              <div
+                class="group-card rounded-3 p-3 shadow-sm"
+                [class.selected-node]="group.id == this.nodeForm.get('group')?.value"
+                (click)="selectGroup($event, group.id!)">
+
+                <div class="group-card-header d-flex align-items-center gap-3 mb-2">
+                  <div class="group-icon rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                    <i class="bi bi-diagram-3 fs-4"></i>
+                  </div>
+                  <div>
+                    <h5 class="mb-0 fw-semibold">{{ group.name }}</h5>
+                    <code class="text-muted small">{{ group.id }}</code>
+                  </div>
+                </div>
+
+                <!-- Devices within the selected group -->
+                @if (group.id == this.nodeForm.get('group')?.value) {
+
+                  <div class="device-section rounded-2 p-3 mt-2">
+                    <h6 class="text-uppercase text-muted fw-bold small mb-3">
+                      <i class="bi bi-cpu me-1"></i>Dispositivos
+                    </h6>
+
+                    @if (devices.length > 0) {
+                      <div class="row g-2">
+                        <!-- Add device card — ADMIN only -->
+                        @if (isAdmin) {
+                          <div class="col-6 col-md-4 col-lg-3">
+                            <div class="device-item rounded-2 p-2 d-flex align-items-center justify-content-center border-dashed add-device-card"
+                              style="min-height: 76px; cursor: pointer;"
+                              (click)="openDeviceForm()">
+                              <div class="text-center text-primary">
+                                <i class="bi bi-plus-circle fs-4 d-block mb-1"></i>
+                                <small>Añadir dispositivo</small>
+                              </div>
+                            </div>
+                          </div>
+                        }
+
+                        @for (device of devices; track device.id) {
+                          <div class="col-6 col-md-4 col-lg-3">
+                            <div class="device-item rounded-2 p-2"
+                              [class.device-active]="device.id == this.nodeForm.get('device')?.value"
+                              (click)="selectDevice(device.id!)">
+                              <div class="d-flex align-items-center gap-2">
+                                <i class="bi bi-cpu fs-5 text-muted"></i>
+                                <div>
+                                  <div class="fw-semibold small text-dark">{{ device.name }}</div>
+                                  <div class="text-muted" style="font-size: 0.7rem;">{{ device.id }}</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        }
+                      </div>
+                    }
+
+                    @if (!devices || devices.length === 0) {
+                      <div class="d-flex align-items-center gap-3 flex-wrap">
+                        <div class="empty-state text-center py-2">
+                          <p class="text-muted mb-2">No existen dispositivos en este grupo</p>
+                        </div>
+                        <!-- Add device card (empty state) — ADMIN only -->
+                        @if (isAdmin) {
+                          <div class="device-item rounded-2 p-3 d-flex align-items-center justify-content-center border-dashed add-device-card"
+                            style="min-height: 90px; min-width: 140px; cursor: pointer;"
+                            (click)="openDeviceForm()">
+                            <div class="text-center text-primary">
+                              <i class="bi bi-plus-circle fs-3 d-block mb-1"></i>
+                              <small>Añadir dispositivo</small>
+                            </div>
+                          </div>
+                        }
+                      </div>
+                    }
+
+                  </div>
+                }
+
+              </div>
+            </div>
+          }
+
+          @empty {
+            <div class="col-12">
+              <div class="empty-state text-center py-5">
+                <i class="bi bi-folder-x empty-icon-lrg fs-1 text-muted d-block mb-3"></i>
+                <h4 class="text-muted">No existen grupos en este proyecto</h4>
+                <!-- Only ADMIN can create groups -->
+                @if (isAdmin) {
+                  <button type="button" class="btn btn-outline-primary mt-2" (click)="openGroupForm()">
+                    <i class="bi bi-plus-circle me-1"></i> Crear primer grupo
+                  </button>
+                }
+              </div>
+            </div>
+          }
+
+        </div>
+      </div>
+    }
+
+  </form>
+  <div class="file"></div>
+</div>

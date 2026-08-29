@@ -1,0 +1,53 @@
+@import '../../../default.scss';
+
+.fw-600 { font-weight: 600; }
+
+.form-label {
+  letter-spacing: 0.5px;
+  font-size: 0.75rem;
+}
+
+.input-group-text {
+  border: 1px solid #e2e8f0;
+}
+
+.form-control {
+  border: 1px solid #e2e8f0;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.95rem;
+
+  &:focus {
+    background-color: #fff;
+    border-color: color(primary);
+    box-shadow: 0 0 0 3px rgba(color(primary), 0.1);
+  }
+}
+
+.alert-danger-soft {
+  background-color: #fef2f2;
+  color: #991b1b;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+}
+
+.btn-primary {
+  background-color: color(primary);
+  border-color: color(primary);
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+
+  &:hover {
+    background-color: darken(color(primary), 5%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  }
+}
+
+.success-animation {
+  animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

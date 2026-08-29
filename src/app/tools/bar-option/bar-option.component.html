@@ -1,0 +1,14 @@
+<div class="option">
+  @if (showOptions) {
+    <div class="project-options">
+        @for (option of options(); track $index) {
+          <div class="item">
+            <h5 (click)="onRedirect(option.id)">{{option.name}}</h5>
+           </div>
+          }
+    </div>
+   }
+  <div class="item">
+    <i class="bi bi-box" (click)="toggleOptions()"></i>
+   </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="auth-page d-flex justify-content-center align-items-center vh-100">
+  <div class="auth-card">
+
+    <!-- Header -->
+    <div class="auth-header text-center mb-4">
+      <div class="auth-logo mb-3">
+        <i class="bi bi-cpu-fill"></i>
+      </div>
+      <h4 class="fw-bold text-dark mb-1">Embedded Platform</h4>
+      <p class="text-muted small mb-0">Ingresa tus credenciales para continuar</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="auth()" class="row g-3">
+
+      <div class="col-12">
+        <label for="_username" class="form-label fw-600 small text-muted text-uppercase">Usuario</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-person text-primary"></i></span>
+          <input type="text" id="_username" formControlName="username"
+            class="form-control bg-light border-start-0" placeholder="Tu usuario" />
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label for="_password" class="form-label fw-600 small text-muted text-uppercase">Contraseña</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock text-primary"></i></span>
+          <input type="password" id="_password" formControlName="password"
+            class="form-control bg-light border-start-0" placeholder="••••••" />
+        </div>
+      </div>
+
+      @if (errorMessage) {
+        <div class="col-12">
+          <div class="alert-danger-soft d-flex align-items-center gap-2">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            {{ errorMessage }}
+          </div>
+        </div>
+      }
+
+      <div class="col-12 mt-2">
+        <button type="submit" class="btn btn-primary w-100 py-2 fw-600"
+          [disabled]="loginForm.invalid || isLoading">
+          @if (isLoading) {
+            <span class="spinner-border spinner-border-sm me-2"></span> Cargando...
+          } @else {
+            Iniciar Sesión
+          }
+        </button>
+      </div>
+
+      <div class="col-12 text-center">
+        <span class="text-muted small">¿No tienes cuenta? </span>
+        <a routerLink="/register" class="text-decoration-none fw-600 small">Regístrate</a>
+      </div>
+
+    </form>
+  </div>
+</div>

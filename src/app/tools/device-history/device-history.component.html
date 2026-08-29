@@ -1,0 +1,67 @@
+<div class="modal-header bg-primary text-white">
+  <h5 class="modal-title">Historial de Actualizaciones - {{deviceName()}}</h5>
+  <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body p-0">
+  <div *ngIf="loading()" class="d-flex justify-content-center p-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!loading() && executions().length === 0" class="text-center p-5 text-muted">
+    <i class="bi bi-info-circle fs-1 d-block mb-3"></i>
+    No hay actualizaciones registradas para este dispositivo.
+  </div>
+
+  <div *ngIf="!loading() && executions().length > 0" class="table-container">
+    <table class="table table-hover mb-0">
+      <thead>
+        <tr>
+          <th class="ps-3">ID del Job</th>
+          <th>Estado</th>
+          <th>Inicio</th>
+          <th class="pe-3">Actualizado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of executions()">
+          <td class="ps-3">
+            <div class="job-id-cell" [title]="job.jobId">
+              <i class="bi bi-hash text-primary me-1"></i>
+              <code>{{job.jobId}}</code>
+            </div>
+          </td>
+          <td>
+            <span [ngClass]="getStatusClass(job.status)">{{job.status}}</span>
+          </td>
+          <td class="text-nowrap">
+            <small>{{job.startedAt | date:'dd/MM HH:mm'}}</small>
+          </td>
+          <td class="pe-3 text-nowrap">
+            <small>{{job.lastUpdatedAt | date:'dd/MM HH:mm'}}</small>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal-footer bg-light border-top-0 py-2">
+  <div class="flex-grow-1">
+    <small class="text-muted fw-bold">
+      <i class="bi bi-list-ol"></i> {{itemRange}}
+      <span class="mx-2 text-silver px-1">|</span>
+      Página {{currentPage()}}
+    </small>
+  </div>
+  <div class="btn-group">
+    <button type="button" class="btn btn-outline-primary btn-sm px-3" 
+            [disabled]="currentPage() === 1 || loading()" (click)="prevPage()">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    <button type="button" class="btn btn-outline-primary btn-sm px-3" 
+            [disabled]="!nextToken() || loading()" (click) ="nextPage()">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+</div>

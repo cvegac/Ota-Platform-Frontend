@@ -1,0 +1,69 @@
+@if (submitStatus !== servicesStatus.SUCCESS) {
+  <div class="modal-header border-0 pb-0">
+    <h5 class="modal-title fw-bold text-dark">Registrar Colaborador</h5>
+    <button type="button" class="btn-close" (click)="activeModal?.dismiss()"></button>
+  </div>
+  
+  <form [formGroup]="collaboratorForm" (ngSubmit)="onSubmit()" class="p-4 bg-white">
+    <div class="row g-3">
+      <div class="col-12">
+        <label for="name" class="form-label fw-600 small text-muted text-uppercase">Nombre Completo</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-person text-primary"></i></span>
+          <input type="text" id="name" formControlName="name" class="form-control bg-light border-start-0" placeholder="Ej: Juan Pérez" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="email" class="form-label fw-600 small text-muted text-uppercase">Correo Electrónico</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-primary"></i></span>
+          <input type="email" id="email" formControlName="email" class="form-control bg-light border-start-0" placeholder="juan@ejemplo.com" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="username" class="form-label fw-600 small text-muted text-uppercase">Nombre de Usuario</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-at text-primary"></i></span>
+          <input type="text" id="username" formControlName="username" class="form-control bg-light border-start-0" placeholder="juanp" />
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label for="password" class="form-label fw-600 small text-muted text-uppercase">Contraseña Inicial</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock text-primary"></i></span>
+          <input type="password" id="password" formControlName="password" class="form-control bg-light border-start-0" placeholder="******" />
+        </div>
+        <div class="form-text mt-1 small">Mínimo 6 caracteres.</div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+      <button type="button" class="btn btn-light px-4" (click)="activeModal?.dismiss()">Cancelar</button>
+      <button type="submit" class="btn btn-primary px-4" [disabled]="!collaboratorForm.valid || submitStatus === servicesStatus.PROCESS">
+        @if (submitStatus === servicesStatus.PROCESS) {
+          <span class="spinner-border spinner-border-sm me-2"></span> Cargando...
+        } @else {
+          Registrar Colaborador
+        }
+      </button>
+    </div>
+
+    @if (statusMessage && submitStatus === servicesStatus.ERROR) {
+      <div class="alert alert-danger-soft mt-3 border-0 d-flex align-items-center">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        {{ statusMessage }}
+      </div>
+    }
+  </form>
+} @else {
+  <div class="p-5 text-center">
+    <div class="success-animation mb-4">
+      <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+    </div>
+    <h4 class="fw-bold text-dark mb-2">¡Registro Exitoso!</h4>
+    <p class="text-muted">{{ statusMessage }}</p>
+  </div>
+}

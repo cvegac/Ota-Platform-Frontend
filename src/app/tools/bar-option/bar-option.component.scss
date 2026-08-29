@@ -1,0 +1,38 @@
+@import '../../../styles.scss';
+.item{
+  font-size: 3rem;
+  text-align: center;
+}
+
+i {
+  cursor: pointer;
+  color: color(primary);
+  transition: color 0.2s ease-out;
+  transition: font-size 0.3s ease-out;
+
+ }
+
+.item i:hover  {
+  color: color(wire);
+  font-size: 3.5rem;
+}
+
+.item h5 {
+  padding: 10px;
+  cursor: pointer;
+  color: color(wire-dark);
+  transition: color 0.2s ease-out;
+  transition: font-size 0.3s ease-out;
+}
+
+.item:hover h5 {
+  color: color(wire);
+  font-size: 1.5rem;
+}
+.project-options{
+  position: absolute;
+  left: 100%;
+  width: 150%;
+  height: auto;
+  background-color: color(primary);
+}

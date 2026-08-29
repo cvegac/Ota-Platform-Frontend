@@ -1,0 +1,25 @@
+@import '../../../styles.scss';
+.navbar{
+  background-color: color(secondary);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.item{
+  font-size: 3rem;
+  text-align: center;
+}
+i {
+  cursor: pointer;
+  color: color(primary);
+  transition: color 0.2s ease-out;
+  transition: font-size 0.3s ease-out;
+
+ }
+
+.item i:hover  {
+  color: color(wire);
+  font-size: 3.5rem;
+}
